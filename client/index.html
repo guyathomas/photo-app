@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Angular Photo App</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="app.js"></script>
+	<script src="viewer.js"></script>
+	<script src="services.js"></script>
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+<body ng-app="app" ng-controller="ViewController">
+	<div class="new-photo">
+		<h1>Photo Library App</h1>
+		<!-- Choose new photo -->
+		Photo URL <input ng-model="url">
+		Photo Title <input ng-model="title">
+		<button ng-click="addPhoto(title, url, 5)">Submit</button>
+	</div>
+
+	<div class="album">
+		<!-- Image List -->
+		<ul class = "image-list">
+			<li>Images</li>
+			<li ng-repeat="picture in pictures" ng-click="updatePhoto($index)">{{picture.title}}</li>
+		</ul>
+
+		<!-- Photo viewer -->
+		<div class = "photo-viewer">
+			<img ng-src="{{pictures[selectedPic].url}}" width="400"/>
+			<div class = photo-details>
+				<span>{{pictures[selectedPic].title}}</span>
+				<span>{{pictures[selectedPic].rating}} Out of 5</span>
+				<select ng-model="newRating" ng-options="rating for rating in [1,2,3,4,5]" ng-change="updateRating(newRating)"></select>
+			</div>
+		</div>
+	</div>
+	<!-- <script src="client/app.js"></script> -->
+
+
+</body>
+</html>
