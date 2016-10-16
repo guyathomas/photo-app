@@ -14,46 +14,48 @@
 	<h1>Photo Library App</h1>
 
 	<!-- Choose new photo -->
-	<div class="col-md-4">
+	<div class="col-md-12">
 		<div class="new-photo" ng-controller="NewPhotoController">
 			<h2>Add New Photo</h2>
 			<input ng-model="url" class="form-control" placeholder="Photo URL">
 			<input ng-model="title" class="form-control" placeholder="Photo Title">
 			<button ng-click="addPhoto(title, url, 1)">Submit</button>
 		</div>
-
-		<div ng-controller="ViewController" class="album">
+		<div ng-controller="ViewController" class="album .col-md-offset-8">
 			<!-- Image List -->
-			<table id="Library" class="table">
-				<h2>Library</h2>
-				<tr><th>Image</th><th>Rating</th></tr>
-				<tr ng-repeat="picture in pictures" ng-click="updatePhoto($index)">
-					<td>{{picture.title}}</td>
-					<td>{{picture.rating}}</td>
-				</tr>
-			</table>
-			<h2>Favourites</h2>
-			<table id="Favourites" class="table">
-				<tr><th>Image</th><th>Rating</th></tr>
-				<tr ng-repeat="picture in pictures | filter:{rating:5}" ng-click="updatePhoto($index)">
-					<td>{{picture.title}}</td>
-					<td>{{picture.rating}}</td>
-				</tr>
-			</table>
-			<div class = "photo-viewer col-md-8">
-				<img ng-src="{{pictures[selectedPic].url}}" width="600"/>
-				<div class = photo-details>
-					<span>{{pictures[selectedPic].title}}</span>
-					<span>{{pictures[selectedPic].rating}} Out of 5</span>
-					<select ng-model="newRating" ng-options="rating for rating in [1,2,3,4,5]" ng-change="updateRating(newRating)"></select>
+			<div class="col-md-4">
+				<table id="Library" class="table">
+					<h2>Library</h2>
+					<tr><th>Image</th><th>Rating</th></tr>
+					<tr ng-repeat="picture in pictures" ng-click="updatePhoto($index)">
+						<td>{{picture.title}}</td>
+						<td>{{picture.rating}}</td>
+					</tr>
+				</table>
+				<h2>Favourites</h2>
+				<table id="Favourites" class="table">
+					<tr><th>Image</th><th>Rating</th></tr>
+					<tr ng-repeat="picture in pictures | filter:{rating:5}" ng-click="updatePhoto($index)">
+						<td>{{picture.title}}</td>
+						<td>{{picture.rating}}</td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<div class = "photo-viewer .col-md-offset-4">
+					<img ng-src="{{pictures[selectedPic].url}}" width="600"/>
+					<div class = photo-details>
+						<span>{{pictures[selectedPic].title}}</span>
+						<span>{{pictures[selectedPic].rating}} Out of 5</span>
+						<select ng-model="newRating" ng-options="rating for rating in [1,2,3,4,5]" ng-change="updateRating(newRating)"></select>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Photo viewer -->
-	<!-- <script src="client/app.js"></script> -->
+		<!-- Photo viewer -->
+		<!-- <script src="client/app.js"></script> -->
 
 
-</body>
-</html>
+	</body>
+	</html>

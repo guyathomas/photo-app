@@ -8,10 +8,10 @@ angular.module('app.controllers', [])
 	$scope.updatePhoto = function(index) {
 		PhotoLibrary.selectedPic = index;
 		$scope.selectedPic = index;
-		console.log(PhotoLibrary.selectedPic, $scope.selectedPic)
 	}
 
 	$scope.updateRating = function(value) {
+		PhotoLibrary.pictures[PhotoLibrary.selectedPic].rating = value
 		PhotoLibrary.updateRating(value);
 	}
 
