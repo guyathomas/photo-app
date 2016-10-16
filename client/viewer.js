@@ -1,30 +1,32 @@
 angular.module('app.controllers', [])
 
 .controller('ViewController', function($scope, PhotoLibrary) {
-	$scope.selectedPic = 0;
-	$scope.pictures = [{title:'Cut kitty', rating: 5, url:'https://s-media-cache-ak0.pinimg.com/originals/84/71/e2/8471e2efdd2d3164895748ee8673124d.jpg'}];
-	
-	newPhotos = PhotoLibrary.getPhotos();
-	$scope.pictures.push(newPhotos);
+
+	$scope.pictures = PhotoLibrary.pictures;
+	$scope.selectedPic = PhotoLibrary.selectedPic;
 
 	$scope.updatePhoto = function(index) {
+		PhotoLibrary.selectedPic = index;
 		$scope.selectedPic = index;
+		console.log(PhotoLibrary.selectedPic, $scope.selectedPic)
 	}
 
 	$scope.updateRating = function(value) {
-		$scope.pictures[$scope.selectedPic].rating = value;
+		PhotoLibrary.updateRating(value);
 	}
 
-	$scope.addPhoto = function(title, url, rating) {
-		console.log(title, url, rating)
-		$scope.pictures.push(PhotoLibrary.newPhoto(title, url, rating));
+	$scope.isFavourite = function(rating) {
+		return rating >= 4;
 	}
 
-	$scope.test = function() {
-		console.log('Ran with ', arguments);
-	}
 })
 
-.controller('NewPhotoController', function($scope) {
+.controller('NewPhotoController', function($scope, PhotoLibrary) {
+	$scope.addPhoto = function(title, url, rating) {
+		PhotoLibrary.newPhoto(title, url, rating)
+	}
 
+	// $scope.test = function() {
+	// 	console.log('Ran with ', arguments);
+	// }
 })
